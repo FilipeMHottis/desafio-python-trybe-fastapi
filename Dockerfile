@@ -10,11 +10,6 @@ COPY . .
 # Install the project dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Run the seeders if environment is TRUE
-RUN if [ "$DEV" = "TRUE" ]; then \
-    python src/app/seeders.py; \
-fi
-
 # Expose the port the app runs on
 EXPOSE 8000
 

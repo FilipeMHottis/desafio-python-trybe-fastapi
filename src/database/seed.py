@@ -1,8 +1,5 @@
-from database.database import db
+from database import db
 
-print("Inserindo dados...")
-
-collection = db["musics"]
 musics_data = [
     {
         "name": "In the End",
@@ -54,6 +51,15 @@ musics_data = [
     },
 ]
 
-collection.insert_many(musics_data)
 
-print("Dados inseridos com sucesso!")
+def run():
+    print("Inserindo dados...")
+
+    collection = db["musics"]
+    collection.insert_many(musics_data)
+
+    print("Dados inseridos com sucesso!")
+
+
+if __name__ == "__main__":
+    run()

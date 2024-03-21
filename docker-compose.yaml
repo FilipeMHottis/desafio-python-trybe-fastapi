@@ -15,7 +15,6 @@ services:
     depends_on:
       - mongo
     environment:
-      - DEV=TRUE
       - API_NAME=api_music
       - MONGO_URL=mongodb://localhost:27017
       - DB_NAME=db_music
