@@ -8,7 +8,7 @@ settings = get_settings()
 app = FastAPI(title=settings.api_name)
 
 
-@app.get("/")
+@app.get("/", tags=["root"])
 def online_api():
     return {"message": "API is online"}
 

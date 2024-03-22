@@ -71,5 +71,5 @@ class AbstractModel(ABC, Generic[T]):
     def delete(cls, _id: str) -> DeleteReturn:
         if not cls.validate_id(_id):
             raise ValueError("Invalid ID")
-        deleted = cls._collection.delete_one({"_id": ObjectId(_id)})
-        return {"deleted": deleted.deleted_count}
+        cls._collection.delete_one({"_id": ObjectId(_id)})
+        return {"msg": "Deleted"}
