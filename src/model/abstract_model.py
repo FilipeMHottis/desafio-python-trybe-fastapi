@@ -13,7 +13,7 @@ class DeleteReturn(TypedDict):
 class AbstractModel(ABC, Generic[T]):
     _collection: Collection
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict = None):
         self.data = data
 
     @classmethod
@@ -22,7 +22,14 @@ class AbstractModel(ABC, Generic[T]):
 
     @classmethod
     def get_all(cls) -> List[T]:
-        return list(cls._collection.find())
+        result = cls._collection.find()
+        return [
+            {
+                **item,
+                "_id": str(item["_id"]),
+            }
+            for item in result
+        ]
 
     @classmethod
     def get_by_id(cls, _id: str) -> T:
@@ -31,20 +38,34 @@ class AbstractModel(ABC, Generic[T]):
         find_returned = cls._collection.find_one({"_id": ObjectId(_id)})
         if not find_returned:
             raise ValueError("ID not found")
-        return find_returned
+        return {
+            **find_returned,
+            "_id": str(find_returned["_id"]),
+        }
 
     def save(self) -> T:
         saved = self._collection.insert_one(self.data)
-        return self._collection.find_one({"_id": saved.inserted_id})
+        result = self._collection.find_one({"_id": saved.inserted_id})
+        return {
+            **result,
+            "_id": str(result["_id"]),
+        }
 
     def update(self, _id: str) -> T:
         if not self.validate_id(_id):
             raise ValueError("Invalid ID")
+
         self._collection.update_one(
             {"_id": ObjectId(_id)},
             {"$set": self.data},
         )
-        return self._collection.find_one({"_id": ObjectId(_id)})
+
+        result = self._collection.find_one({"_id": ObjectId(_id)})
+
+        return {
+            **result,
+            "_id": str(result["_id"]),
+        }
 
     @classmethod
     def delete(cls, _id: str) -> DeleteReturn:
