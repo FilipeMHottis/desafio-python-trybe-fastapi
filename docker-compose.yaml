@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7.0.7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+
+  app:
+    build: .
+    container_name: app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    environment:
+      - API_NAME=api_music
+      - MONGO_URL=mongodb://localhost:27017
+      - DB_NAME=db_music
+      - MINUTE_RATE_LIMIT=60
+    volumes:
+      - .:/app

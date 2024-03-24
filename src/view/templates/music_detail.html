@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='main.css') }}">
 
     <title>Home</title>
 </head>
@@ -20,7 +20,7 @@
                 <p>Por: {{ music.artist }}</p>
                 <span>Álbum: {{ music.album }} </span>
                 <span>Ano de lançamento:  {{ music.release_year }} </span>
-                <img src="{{ url_for('static', filename=music.image) }}" class="music_image">
+                <img src="{{ url_for('static', path=music.image) }}" class="music_image">
                 <span>Gênero: {{ music.gender }} </span>
                 <span>ID: {{ music._id }} </span>
             </section>
