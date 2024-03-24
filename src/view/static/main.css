@@ -1,0 +1,66 @@
+body, main {
+    background-color: rgb(29, 28, 28);
+    color: azure;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+h1, a, p, span, img {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.music_container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+    justify-content: space-around;
+}
+
+.music_card {
+    align-items: center;
+    border: 2px solid rgb(95, 3, 137);
+    border-radius: 10px;
+    box-shadow: -10px 10px rgba(123, 0, 200, 0.292);
+    display: flex;
+    flex-flow: column wrap;
+    height: 40%;
+    justify-content: space-around;
+    width: 28%;
+}
+
+.music_image {
+    border-radius: 100%;
+    margin-top: 10px;
+    width: 45%;
+}
+
+.music_container:hover > * {
+    opacity: 0.5;
+}
+
+.music_container:hover > *:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+@media screen and (max-width: 1000px) {
+    .music_container {
+        flex-wrap: wrap;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .music_card {
+        height: 30%;
+        width: 40%;
+    }
+
+    .music_image {
+        width: 30%;
+    }
+}
